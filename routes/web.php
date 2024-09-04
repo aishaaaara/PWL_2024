@@ -78,3 +78,9 @@ Route::resource('photos', PhotoController::class)->only([
     'index', 'show']);
 Route::resource('photos', PhotoController::class)->except([
     'create', 'store', 'update', 'destroy']);
+
+//prak 3
+// Route::get('/greeting', function () {
+//     return view('blog.hello', ['name' => 'Aisha']); });
+
+Route::get('/greeting', [WelcomeController::class, 'greeting']);
