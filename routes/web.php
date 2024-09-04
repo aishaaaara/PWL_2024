@@ -1,6 +1,15 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\HomeConstroller;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PhotoController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +22,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//prak 1
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route ::get('/hello', function(){
-    return 'hello world';
-});
+// Route ::get('/hello', function(){
+//     return 'hello world';
+// });
 
 Route ::get('/world', function(){
     return 'world';
@@ -54,3 +64,17 @@ Route::get('/article/{id}', function
 Route::get('/user/{name?}', function ($name='John') {
     return 'Nama saya '.$name;
 });
+
+//prak 2
+Route::get('/hello', [WelcomeController::class,'hello']);
+
+Route::get('/', [HomeConstroller::class,'index']);
+Route::get('/about', [AboutController::class,'about']);
+Route::get('/articles/{id}', [ArticlesController:: class,'articles']);
+
+//
+Route::resource('photos', PhotoController::class);
+Route::resource('photos', PhotoController::class)->only([
+    'index', 'show']);
+Route::resource('photos', PhotoController::class)->except([
+    'create', 'store', 'update', 'destroy']);
